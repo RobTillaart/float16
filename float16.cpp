@@ -193,9 +193,9 @@ uint16_t float16::f32tof16(float f) const
     int16_t  exp = (t & 0x7F800000) >> 23;
     bool     sgn = (t & 0x80000000);
 
-    Serial.print("SGN: "); Serial.println(sgn, BIN);
-    Serial.print("EXP: "); Serial.println(exp, BIN);
-    Serial.print("MAN: "); Serial.println(man, BIN);
+    // Serial.print("SGN: "); Serial.println(sgn, BIN);
+    // Serial.print("EXP: "); Serial.println(exp, BIN);
+    // Serial.print("MAN: "); Serial.println(man, BIN);
 
     // handle 0
     if ((t & 0x7FFFFFFF) == 0)
@@ -210,18 +210,21 @@ uint16_t float16::f32tof16(float f) const
     // handle infinity & NAN
     if (exp == 0x00FF)
     {
-        if (man) return 0xFE00;         // NAN
+        if (man) return 0xFE00;         //  NAN
         return sgn ? 0xFC00 : 0x7C00;   // -INF : INF
     }
+
     // normal numbers
     exp = exp - 127 + 15;
-    if (exp > 30) // overflow does not fit => INF
+    // overflow does not fit => INF
+    if (exp > 30) 
     {
-        return sgn ? 0xFC00 : 0x7C00;
+        return sgn ? 0xFC00 : 0x7C00;   // -INF : INF
     }
-    if (exp < -38) // subnormal not possible => zero
+    //  subnormal numbers
+    if (exp < -38)
     {
-        return sgn ? 0x8000 : 0x0000;
+        return sgn ? 0x8000 : 0x0000;  // -0 or 0  ?   just 0 ?
     }
     if (exp <= 0) // subnormal
     {
@@ -229,14 +232,18 @@ uint16_t float16::f32tof16(float f) const
         // rounding
         man++;
         man >>= 1;
-        return sgn ? 0x8000 : 0x0000 | man;
+        return (sgn ? 0x8000 : 0x0000) | man;
     }
+
     // normal
     // TODO rounding
     exp <<= 10;
     man++;
     man >>= 1;
-    return sgn ? 0x8000 : 0x0000 | exp | man;
+    // Serial.print("SGN: "); Serial.println(sgn, BIN);
+    // Serial.print("EXP: "); Serial.println(exp, BIN);
+    // Serial.print("MAN: "); Serial.println(man, BIN);
+    return (sgn ? 0x8000 : 0x0000) | exp | man;
 }
 
 

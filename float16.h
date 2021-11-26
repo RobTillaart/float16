@@ -18,18 +18,20 @@
 class float16: public Printable
 {
   public:
+    // Constructors
     float16(void)               { n = 0; };
-    float16(double);
+    float16(double f);
     float16(const float16 &f)   { n = f.n; };
 
-    uint16_t getBinary()           { return n; };
-    void     setBinary(uint16_t u) { n = u; };
-
+    // Conversion
     double   toDouble(void) const;
-    size_t   printTo(Print& p) const;
 
+    // Printable
+    size_t   printTo(Print& p) const;
     void     setDecimals(uint8_t d) { _decimals = d; };
     uint8_t  getDecimals()          { return _decimals; };
+
+
 
 //    bool isNaN();
 //    bool isInf();
@@ -60,9 +62,12 @@ class float16: public Printable
     float16& operator /= (const float16&);
     */
 
-    // TODO 
+
+    // DEBUGGING
     // should be private but for testing...
-    float f16tof32(uint16_t) const;
+    uint16_t getBinary()           { return n; };
+    void     setBinary(uint16_t u) { n = u; };
+    float    f16tof32(uint16_t) const;
     uint16_t f32tof16(float) const;
 
 

@@ -41,7 +41,24 @@ a floating point number. As it is only 2 bytes where float and double have typic
 
 ## Interface
 
-See float16.h for a list of functions implemented.
+to elaborate
+
+#### Constructors
+
+- **float16(void)** defaults to zero.
+- **float16(double f)** constructor.
+- **float16(const float16 &f)** copy constructor.
+
+
+#### Conversion
+
+- **double toDouble(void)** convert to double (or float)
+- **size_t printTo(Print& p) const** Printable interface.
+- **void setDecimals(uint8_t d)** idem.
+- **uint8_t getDecimals()** idem.
+
+
+#### Compare
 
 to elaborate
 
@@ -59,6 +76,7 @@ The strategy is to get these working first and optionally optimize them later.
 
 to get focus on getting things done...
 
+
 #### 0.1.4
 
 the following should work:
@@ -68,12 +86,15 @@ the following should work:
 - negative numbers
 - infinity
 - rounding to zero (e.g. 1e-30)
+- array of numbers.
+- unit tests of the above..
 
 
 #### 0.1.5
 
 - update documentation
 - comparison operators
+- unit tests of the above..
 
 
 #### 0.1.6
@@ -84,6 +105,7 @@ the following should work:
 - isINF()
 - abs()
 - sgn()
+- unit tests of the above..
 
 
 #### later
@@ -93,9 +115,6 @@ the following should work:
 - divide by zero errors.
 - f16tof32() + f32tof16()
 - rewrite toDouble with bit magic
-- isNan()
-- isINF()
-- abs()
-- sgn()
+- ...
 
 

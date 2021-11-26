@@ -12,8 +12,12 @@
 
 void setup()
 {
+  while(!Serial);
   Serial.begin(115200);
-  Serial.println("Start ");
+  Serial.println(__FILE__);
+  Serial.print("FLOAT16_LIB_VERSION: ");
+  Serial.println(FLOAT16_LIB_VERSION);
+  Serial.println("\nStart ");
 
   for (uint32_t n = 1; n < 65536; n *= 2)
   {
@@ -40,7 +44,8 @@ void setup()
     Serial.print(abs(f16.toDouble() * n), 8);
     Serial.println();
   }
-  Serial.println("done");
+
+  Serial.println("\ndone");
 }
 
 

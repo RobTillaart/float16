@@ -11,14 +11,15 @@
 
 float16 X;
 
-uint32_t start;
-uint32_t stop;
-
 
 void setup()
 {
+  while(!Serial);
   Serial.begin(115200);
-  Serial.println("Start ");
+  Serial.println(__FILE__);
+  Serial.print("FLOAT16_LIB_VERSION: ");
+  Serial.println(FLOAT16_LIB_VERSION);
+  Serial.println("\nStart ");
 
   float f;
 
@@ -29,7 +30,8 @@ void setup()
     Serial.print('\t');
     Serial.println(f, 6);
   }
-  Serial.println("done");
+
+  Serial.println("\ndone");
 }
 
 

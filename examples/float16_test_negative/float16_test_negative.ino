@@ -12,13 +12,23 @@
 
 void setup()
 {
+  while(!Serial);
   Serial.begin(115200);
-  Serial.println("Start ");
+  Serial.println(__FILE__);
+  Serial.print("FLOAT16_LIB_VERSION: ");
+  Serial.println(FLOAT16_LIB_VERSION);
+  Serial.println("\nStart ");
 
-  float16 f16(-1);
-  Serial.println(f16.toDouble(), 4);
 
-  Serial.println("done");
+  for( int i = -10; i < 2; i++)
+  {
+    float16 f16(i);
+    Serial.print(i);
+    Serial.print("\t");
+    Serial.println(f16.toDouble(), 4);
+  }
+
+  Serial.println("\ndone");
 }
 
 
