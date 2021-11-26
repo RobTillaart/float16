@@ -57,10 +57,39 @@ The strategy is to get these working first and optionally optimize them later.
 
 ## TODO (future)
 
-not in priority order.
+to get focus on getting things done...
+
+#### 0.1.4
+
+the following should work:
+
+- update documentation
+- positive numbers
+- negative numbers
+- infinity
+- rounding to zero (e.g. 1e-30)
+
+
+#### 0.1.5
+
+- update documentation
+- comparison operators
+
+
+#### 0.1.6
 
 - update documentation
 - get basic math working (+-*/)
+- isNan()
+- isINF()
+- abs()
+- sgn()
+
+
+#### later
+
+- update documentation
+- get basic math II working += -= *= /=
 - divide by zero errors.
 - f16tof32() + f32tof16()
 - rewrite toDouble with bit magic

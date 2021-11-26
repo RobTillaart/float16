@@ -193,9 +193,9 @@ uint16_t float16::f32tof16(float f) const
     int16_t  exp = (t & 0x7F800000) >> 23;
     bool     sgn = (t & 0x80000000);
 
-    Serial.println(sgn, BIN);
-    Serial.println(exp, BIN);
-    Serial.println(man, BIN);
+    Serial.print("SGN: "); Serial.println(sgn, BIN);
+    Serial.print("EXP: "); Serial.println(exp, BIN);
+    Serial.print("MAN: "); Serial.println(man, BIN);
 
     // handle 0
     if ((t & 0x7FFFFFFF) == 0)

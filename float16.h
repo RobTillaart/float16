@@ -28,8 +28,8 @@ class float16: public Printable
     double   toDouble(void) const;
     size_t   printTo(Print& p) const;
 
-    void     setDecimals(uint8_t d) { decimals = d; };
-    uint8_t  getDecimals() { return _decimals; };
+    void     setDecimals(uint8_t d) { _decimals = d; };
+    uint8_t  getDecimals()          { return _decimals; };
 
 //    bool isNaN();
 //    bool isInf();
