@@ -63,13 +63,15 @@ unittest(test_constructor)
   float goldenRatio = 1.61803398875;
   float16 gr(goldenRatio);
   assertEqualFloat(1.000, (goldenRatio / gr.toDouble()), 1e-2);
+
   float16 minusOne(-1);
   fprintf(stderr, "MINUSONE: %f\n", minusOne.toDouble());
   assertEqualFloat(1.000, (-1 / minusOne.toDouble()), 1e-2);
 
-  // NAN constructor
-  float16 nanny(1.0/0.0);
-  assertNAN(nanny.toDouble());
+  // TODO
+  // NAN constructor how to test 
+  // float16 nanny(1.0/0.0);
+  // assertNAN(nanny.toDouble());
 
   // Overflow constructor
   float16 big(1e6);
@@ -77,7 +79,7 @@ unittest(test_constructor)
 
   float16 bag(-1e6);
   assertInfinity(bag.toDouble());
-  
+
   float16 small(1e-30);
   assertEqualFloat(0.0, small.toDouble(), 1e-3);
 }
@@ -87,6 +89,14 @@ unittest(test_comparisons)
 {
   fprintf(stderr, "FLOAT16_LIB_VERSION: %s\n", (char*) FLOAT16_LIB_VERSION);
 
+}
+
+
+unittest(test_negation)
+{
+  fprintf(stderr, "FLOAT16_LIB_VERSION: %s\n", (char*) FLOAT16_LIB_VERSION);
+
+  // f = -f 
 }
 
 

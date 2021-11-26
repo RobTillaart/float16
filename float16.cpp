@@ -30,7 +30,7 @@ float16::float16(double f)
 size_t float16::printTo(Print& p) const
 {
     double d = this->f16tof32(n);
-    return p.print(d, decimals);
+    return p.print(d, _decimals);
 };
 
 
@@ -192,6 +192,10 @@ uint16_t float16::f32tof16(float f) const
     uint16_t man = (t & 0x007FFFFF) >> 12;
     int16_t  exp = (t & 0x7F800000) >> 23;
     bool     sgn = (t & 0x80000000);
+
+    Serial.println(sgn, BIN);
+    Serial.println(exp, BIN);
+    Serial.println(man, BIN);
 
     // handle 0
     if ((t & 0x7FFFFFFF) == 0)
