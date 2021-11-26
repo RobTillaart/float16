@@ -64,6 +64,7 @@ unittest(test_constructor)
   float16 gr(goldenRatio);
   assertEqualFloat(1.000, (goldenRatio / gr.toDouble()), 1e-2);
   float16 minusOne(-1);
+  fprintf(stderr, "MINUSONE: %f\n", minusOne.toDouble());
   assertEqualFloat(1.000, (-1 / minusOne.toDouble()), 1e-2);
 
   // NAN constructor
@@ -72,10 +73,10 @@ unittest(test_constructor)
 
   // Overflow constructor
   float16 big(1e6);
-  assertNAN(big.toDouble());
+  assertInfinity(big.toDouble());
 
   float16 bag(-1e6);
-  assertNAN(bag.toDouble());
+  assertInfinity(bag.toDouble());
   
   float16 small(1e-30);
   assertEqualFloat(0.0, small.toDouble(), 1e-3);
