@@ -31,14 +31,16 @@
 
 #include "float16.h"
 
-uint32_t start;
-uint32_t stop;
 
 void setup()
 {
+  while(!Serial);
   Serial.begin(115200);
-  Serial.print("Start float16_test0,  LIB_VERSION: ");
+  Serial.println(__FILE__);
+  Serial.print("FLOAT16_LIB_VERSION: ");
   Serial.println(FLOAT16_LIB_VERSION);
+  Serial.println("\nStart ");
+
   Serial.println();
 
   test_constructors();

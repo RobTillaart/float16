@@ -1,15 +1,13 @@
 //
-//    FILE: float16_test1.ino
+//    FILE: float16_test_negative.ino
 //  AUTHOR: Rob Tillaart
 // VERSION: 0.1.0
 // PURPOSE: test float16
-//    DATE: 2015-03-11
+//    DATE: 2021-11-26
 //     URL: https://github.com/RobTillaart/float16
 //
 
 #include "float16.h"
-
-float16 X;
 
 
 void setup()
@@ -21,14 +19,13 @@ void setup()
   Serial.println(FLOAT16_LIB_VERSION);
   Serial.println("\nStart ");
 
-  float f;
 
-  for (uint16_t n = 0; n < 65535; n++)
+  for( int i = -10; i < 2; i++)
   {
-    f = X.f16tof32(n);
-    Serial.print(n);
-    Serial.print('\t');
-    Serial.println(f, 6);
+    float16 f16(i);
+    Serial.print(i);
+    Serial.print("\t");
+    Serial.println(f16.toDouble(), 4);
   }
 
   Serial.println("\ndone");
@@ -41,5 +38,3 @@ void loop()
 
 
 // -- END OF FILE --
-
-

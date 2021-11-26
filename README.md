@@ -25,22 +25,43 @@ a floating point number. As it is only 2 bytes where float and double have typic
 4 and 8, gains can be made at the price of range and precision.
 
 
-## specs
+## Specifications
 
-To elaborate table
 
-| attribute | value      |
-|:---------:|:----------:|
-| Size      | 2 bytes    |
-| mantissa  |            |
-| exponent  |            |
-| minimum   |            |
-| maximum   |            |
+| attribute | value        |  notes       |
+|:----------|:-------------|:-------------|
+| Size      | 2 bytes      |              |
+| sign      | 1 bit        |              |
+| mantissa  | 11 bit       | ~ 3 digits   |
+| exponent  | 4 bit        |              |
+| minimum   | 1.0009765625 |  1 + 2^−10   |
+| maximum   | 65504        |              |
+|           |              |              |
 
 
 ## Interface
 
-See float16.h for a list of functions implemented.
+to elaborate
+
+#### Constructors
+
+- **float16(void)** defaults to zero.
+- **float16(double f)** constructor.
+- **float16(const float16 &f)** copy constructor.
+
+
+#### Conversion
+
+- **double toDouble(void)** convert to double (or float)
+- **size_t printTo(Print& p) const** Printable interface.
+- **void setDecimals(uint8_t d)** idem, used for printTo.
+- **uint8_t getDecimals()** idem.
+
+Note the setDecimals takes one byte per object which is not efficient for arrays.
+See array example for efficient storage using set/getBinary() functions.
+
+
+#### Compare
 
 to elaborate
 
@@ -56,16 +77,47 @@ The strategy is to get these working first and optionally optimize them later.
 
 ## TODO (future)
 
-not in priority order.
+to get focus on getting things done...
+
+
+#### 0.1.4
+
+the following should work:
+
+- update documentation
+- positive numbers
+- negative numbers
+- infinity
+- rounding to zero (e.g. 1e-30)
+- array of numbers.
+- unit tests of the above..
+
+
+#### 0.1.5
+
+- update documentation
+- comparison operators
+- unit tests of the above..
+
+
+#### 0.1.6
 
 - update documentation
 - get basic math working (+-*/)
-- divide by zero errors.
-- f16tof32() + f32tof16()
-- rewrite toDouble with bit magic
 - isNan()
 - isINF()
 - abs()
 - sgn()
+- unit tests of the above..
+
+
+#### later
+
+- update documentation
+- get basic math II working += -= *= /=
+- divide by zero errors.
+- f16tof32() + f32tof16()
+- rewrite toDouble with bit magic
+- ...
 
 
