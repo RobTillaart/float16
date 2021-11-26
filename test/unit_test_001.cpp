@@ -7,6 +7,28 @@
 //          https://github.com/Arduino-CI/arduino_ci/blob/master/REFERENCE.md
 //
 
+// supported assertions
+// ----------------------------
+// assertEqual(expected, actual);               // a == b
+// assertNotEqual(unwanted, actual);            // a != b
+// assertComparativeEquivalent(expected, actual);    // abs(a - b) == 0 or (!(a > b) && !(a < b))
+// assertComparativeNotEquivalent(unwanted, actual); // abs(a - b) > 0  or ((a > b) || (a < b))
+// assertLess(upperBound, actual);              // a < b
+// assertMore(lowerBound, actual);              // a > b
+// assertLessOrEqual(upperBound, actual);       // a <= b
+// assertMoreOrEqual(lowerBound, actual);       // a >= b
+// assertTrue(actual);
+// assertFalse(actual);
+// assertNull(actual);
+
+// // special cases for floats
+// assertEqualFloat(expected, actual, epsilon);    // fabs(a - b) <= epsilon
+// assertNotEqualFloat(unwanted, actual, epsilon); // fabs(a - b) >= epsilon
+// assertInfinity(actual);                         // isinf(a)
+// assertNotInfinity(actual);                      // !isinf(a)
+// assertNAN(arg);                                 // isnan(a)
+// assertNotNAN(arg);                              // !isnan(a)
+
 
 #include <ArduinoUnitTests.h>
 
@@ -31,19 +53,32 @@ unittest(test_constructor)
   float16 zero;
   assertEqualFloat(0.000, zero.toDouble(), 1e-2);
   float16 one(1);
-  assertEqualFloat(1.000, zero.toDouble(), 1e-2);
+  assertEqualFloat(1.000, one.toDouble(), 1e-2);
 
   float16 e(exp(1));
-  assertEqualFloat(2.782, e.toDouble(), 1e-2);
+  assertEqualFloat(1.000, ( 2.782 / e.toDouble()), 1e-2);
   float16 pie(PI);
-  assertEqualFloat(3.142, pie.toDouble(), 1e-2);
+  assertEqualFloat(1.000, (3.142 / pie.toDouble()), 1e-2);
 
-  float16 gr(1.61803398875);    // golden ratio
-  assertEqualFloat(1.618, gr.toDouble(), 1e-2);
+  float goldenRatio = 1.61803398875;
+  float16 gr(goldenRatio);
+  assertEqualFloat(1.000, (goldenRatio / gr.toDouble()), 1e-2);
   float16 minusOne(-1);
-  assertEqualFloat(-1.00, minusOne.toDouble(), 1e-2);
+  assertEqualFloat(1.000, (-1 / minusOne.toDouble()), 1e-2);
 
-  // TODO overflow and NAN constructors?
+  // NAN constructor
+  float16 nanny(1.0/0.0);
+  assertNAN(nanny.toDouble());
+
+  // Overflow constructor
+  float16 big(1e6);
+  assertNAN(big.toDouble());
+
+  float16 bag(-1e6);
+  assertNAN(bag.toDouble());
+  
+  float16 small(1e-30);
+  assertEqualFloat(0.0, small.toDouble(), 1e-3);
 }
 
 
@@ -62,7 +97,7 @@ unittest(test_conversion)
   {
     float f = random(60000000) * 0.001;
     float16 f16(f);
-    assertEqualFloat(1, (f / f16.toDouble()), 1e-2);
+    assertEqualFloat(1, (f / f16.toDouble()), 1e-3);
   }
 }
 
