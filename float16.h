@@ -25,7 +25,10 @@ class float16: public Printable
 
     // Conversion
     double   toDouble(void) const;
-
+    //  access the 2 byte representation.
+    uint16_t getBinary()           { return n; };
+    void     setBinary(uint16_t u) { n = u; };
+    
     // Printable
     size_t   printTo(Print& p) const;
     void     setDecimals(uint8_t d) { _decimals = d; };
@@ -65,8 +68,6 @@ class float16: public Printable
 
     // DEBUGGING
     // should be private but for testing...
-    uint16_t getBinary()           { return n; };
-    void     setBinary(uint16_t u) { n = u; };
     float    f16tof32(uint16_t) const;
     uint16_t f32tof16(float) const;
 

@@ -54,8 +54,11 @@ to elaborate
 
 - **double toDouble(void)** convert to double (or float)
 - **size_t printTo(Print& p) const** Printable interface.
-- **void setDecimals(uint8_t d)** idem.
+- **void setDecimals(uint8_t d)** idem, used for printTo.
 - **uint8_t getDecimals()** idem.
+
+Note the setDecimals takes one byte per object which is not efficient for arrays.
+See array example for efficient storage using set/getBinary() functions.
 
 
 #### Compare
