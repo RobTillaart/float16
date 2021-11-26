@@ -1,12 +1,10 @@
 //
-//    FILE: .ino
+//    FILE: float16_test1.ino
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.00
-// PURPOSE:
-//    DATE:
-//     URL:
-//
-// Released to the public domain
+// VERSION: 0.1.0
+// PURPOSE: test float16
+//    DATE: 2015-03-11
+//     URL: https://github.com/RobTillaart/float16
 //
 
 #include "float16.h"
@@ -15,6 +13,7 @@ float16 X;
 
 uint32_t start;
 uint32_t stop;
+
 
 void setup()
 {
@@ -29,10 +28,10 @@ void setup()
     Serial.print(n);
     Serial.print('\t');
     Serial.println(f, 6);
-
   }
   Serial.println("done");
 }
+
 
 void loop()
 {

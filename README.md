@@ -25,17 +25,18 @@ a floating point number. As it is only 2 bytes where float and double have typic
 4 and 8, gains can be made at the price of range and precision.
 
 
-## specs
+## Specifications
 
-To elaborate table
 
-| attribute | value      |
-|:---------:|:----------:|
-| Size      | 2 bytes    |
-| mantissa  |            |
-| exponent  |            |
-| minimum   |            |
-| maximum   |            |
+| attribute | value        |              |
+|:---------:|:------------:|:------------:|
+| Size      | 2 bytes      |              |
+| sign      | 1 bit        |              |
+| mantissa  | 11 bit       |              |
+| exponent  | 4 bit        |              |
+| minimum   | 1.0009765625 |  1 + 2^−10   |
+| maximum   | 65504        |              |
+|           |              |              |
 
 
 ## Interface
