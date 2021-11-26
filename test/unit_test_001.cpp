@@ -151,11 +151,11 @@ unittest(test_printable)
   fprintf(stderr, "FLOAT16_LIB_VERSION: %s\n", (char*) FLOAT16_LIB_VERSION);
 
   float16 f16(123.456);
-  assertEqual(4, f16.getDecimals();
+  assertEqual(4, f16.getDecimals());
   for (int i = 0; i < 6; i++)
   {
     f16.setDecimals(i);
-    assertEqual(i, f16.getDecimals();
+    assertEqual(i, f16.getDecimals());
   }
 
   // todo printable? how to test?
