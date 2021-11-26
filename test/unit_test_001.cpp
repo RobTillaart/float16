@@ -56,7 +56,7 @@ unittest(test_constructor)
   assertEqualFloat(1.000, one.toDouble(), 1e-2);
 
   float16 e(exp(1));
-  assertEqualFloat(1.000, ( 2.782 / e.toDouble()), 1e-2);
+  assertEqualFloat(1.000, ( 2.7183 / e.toDouble()), 1e-2);
   float16 pie(PI);
   assertEqualFloat(1.000, (3.142 / pie.toDouble()), 1e-2);
 
