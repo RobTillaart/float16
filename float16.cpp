@@ -94,8 +94,9 @@ bool float16::operator <= (const float16 &f)
 //
 float16 float16::operator - ()
 {
-  this->setBinary(_value ^ 0x8000);
-  return *this;
+  float16 f16;
+  f16.setBinary(_value ^ 0x8000);
+  return f16;
 }
 
 
