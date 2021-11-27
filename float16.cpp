@@ -74,16 +74,16 @@ bool float16::operator >= (const float16 &f)
 bool float16::operator < (const float16 &f)
 {
     if ((_value & 0x8000) && (f._value & 0x8000)) return _value > f._value;
-    if (_value & 0x8000) return false;
-    if (f._value & 0x8000) return true;
+    if (_value & 0x8000) return true;
+    if (f._value & 0x8000) return false;
     return _value < f._value;
 }
 
 bool float16::operator <= (const float16 &f)
 {
     if ((_value & 0x8000) && (f._value & 0x8000)) return _value >= f._value;
-    if (_value   & 0x8000) return false;
-    if (f._value & 0x8000) return true;
+    if (_value   & 0x8000) return true;
+    if (f._value & 0x8000) return false;
     return _value <= f._value;
 }
 
