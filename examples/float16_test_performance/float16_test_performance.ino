@@ -97,8 +97,6 @@ void setup()
   Serial.println(stop - start);
   delay(10);
 
-
-
   Serial.println("\ndone");
 }
 

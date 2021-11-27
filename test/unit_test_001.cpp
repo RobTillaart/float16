@@ -176,6 +176,7 @@ unittest(test_printable)
     assertEqual(i, f16.getDecimals());
   }
 
+  //  TODO
   // printable? how to test?
 }
 
