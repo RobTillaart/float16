@@ -69,7 +69,7 @@ unittest(test_constructor)
   assertEqualFloat(1.000, (-1 / minusOne.toDouble()), 1e-3);
 
   //  TODO
-  //  NAN constructor how to test 
+  //  NAN constructor how to test
   //  float16 nanny(1.0/0.0);
   //  assertNAN(nanny.toDouble());
 
@@ -82,6 +82,8 @@ unittest(test_constructor)
 
   float16 small(1e-30);
   assertEqualFloat(0.0, small.toDouble(), 1e-3);
+  float16 smaller(-1e-30);
+  assertEqualFloat(0.0, smaller.toDouble(), 1e-3);
 }
 
 
@@ -92,13 +94,18 @@ unittest(test_compare_equal)
   float16 a(1);
   float16 b(1);
   float16 c(2);
+  float16 d(-1);
 
   assertTrue(a == a);
   assertTrue(a == b);
   assertFalse(a == c);
+  assertFalse(a == d);
+
+  fprintf(stderr, "\n");
   assertFalse(a != a);
   assertFalse(a != b);
   assertTrue(a != c);
+  assertTrue(a != d);
 }
 
 
@@ -109,16 +116,24 @@ unittest(test_compare_1nequal)
   float16 a(1);
   float16 b(1);
   float16 c(2);
+  float16 d(-2);
 
   assertFalse(a < a);
   assertTrue(a <= b);
   assertFalse(a > b);
   assertTrue(a >= a);
 
+  fprintf(stderr, "\n");
   assertTrue(a < c);
   assertTrue(a <= c);
   assertFalse(a > c);
   assertFalse(a >= c);
+
+  fprintf(stderr, "\n");
+  assertFalse(a < d);
+  assertFalse(a <= d);
+  assertTrue(a > d);
+  assertTrue(a >= d);
 }
 
 
@@ -128,8 +143,10 @@ unittest(test_negation)
 
   float16 f16(123.456);
   float16 f17(-f16);
+  float16 f18 = -f16;
 
   assertEqualFloat(-123.456, f17.toDouble(), 1e-1);
+  assertEqualFloat(-123.456, f18.toDouble(), 1e-1);
 }
 
 
@@ -151,6 +168,7 @@ unittest(test_printable)
   fprintf(stderr, "FLOAT16_LIB_VERSION: %s\n", (char*) FLOAT16_LIB_VERSION);
 
   float16 f16(123.456);
+  // test default value.
   assertEqual(4, f16.getDecimals());
   for (int i = 0; i < 6; i++)
   {
@@ -158,7 +176,8 @@ unittest(test_printable)
     assertEqual(i, f16.getDecimals());
   }
 
-  // todo printable? how to test?
+  //  TODO
+  // printable? how to test?
 }
 
 

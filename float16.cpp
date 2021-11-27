@@ -154,7 +154,7 @@ float float16::f16tof32(uint16_t n) const
 #ifdef DEBUG
         Serial.println("ZERO");
 #endif
-        return sgn?-0:0;
+        return sgn ? -0 : 0;
     }
     // NAN & INF
     if (exp == 0x001F)
@@ -232,7 +232,8 @@ uint16_t float16::f32tof16(float f) const
         // rounding
         man++;
         man >>= 1;
-        return (sgn ? 0x8000 : 0x0000) | man;
+        if (sgn) return 0x8000 | man;
+        return man;
     }
 
     // normal
@@ -243,7 +244,8 @@ uint16_t float16::f32tof16(float f) const
     // Serial.print("SGN: "); Serial.println(sgn, BIN);
     // Serial.print("EXP: "); Serial.println(exp, BIN);
     // Serial.print("MAN: "); Serial.println(man, BIN);
-    return (sgn ? 0x8000 : 0x0000) | exp | man;
+    if (sgn) return 0x8000 | exp | man;
+    return exp | man;
 }
 
 
