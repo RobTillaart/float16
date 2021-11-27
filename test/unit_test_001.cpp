@@ -82,6 +82,8 @@ unittest(test_constructor)
 
   float16 small(1e-30);
   assertEqualFloat(0.0, small.toDouble(), 1e-3);
+  float16 smaller(-1e-30);
+  assertEqualFloat(0.0, smaller.toDouble(), 1e-3);
 }
 
 
@@ -92,13 +94,16 @@ unittest(test_compare_equal)
   float16 a(1);
   float16 b(1);
   float16 c(2);
-
+  float16 d(-1);
+  
   assertTrue(a == a);
   assertTrue(a == b);
   assertFalse(a == c);
+  assertFalse(a == d);
   assertFalse(a != a);
   assertFalse(a != b);
   assertTrue(a != c);
+  assertTrue(a != d);
 }
 
 
@@ -109,6 +114,7 @@ unittest(test_compare_1nequal)
   float16 a(1);
   float16 b(1);
   float16 c(2);
+  float16 d(-2);
 
   assertFalse(a < a);
   assertTrue(a <= b);
@@ -119,6 +125,11 @@ unittest(test_compare_1nequal)
   assertTrue(a <= c);
   assertFalse(a > c);
   assertFalse(a >= c);
+
+  assertFalse(a < d);
+  assertFalse(a <= d);
+  assertTrue(a > d);
+  assertTrue(a >= d);
 }
 
 
@@ -128,8 +139,10 @@ unittest(test_negation)
 
   float16 f16(123.456);
   float16 f17(-f16);
+  float16 f18 = -f16;
 
   assertEqualFloat(-123.456, f17.toDouble(), 1e-1);
+  assertEqualFloat(-123.456, f18.toDouble(), 1e-1);
 }
 
 
@@ -158,7 +171,7 @@ unittest(test_printable)
     assertEqual(i, f16.getDecimals());
   }
 
-  // todo printable? how to test?
+  // printable? how to test?
 }
 
 
