@@ -32,7 +32,6 @@
 
 #include <ArduinoUnitTests.h>
 
-#include "Arduino.h"
 #include "float16.h"
 
 
@@ -173,4 +172,4 @@ unittest(test_printable)
 unittest_main()
 
 
-// -- END OF FILE --
+//  -- END OF FILE --

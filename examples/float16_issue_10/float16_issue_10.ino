@@ -1,3 +1,10 @@
+//
+//    FILE: float16_issue_10.ino
+//  AUTHOR: alecelular, Rob Tillaart
+// PURPOSE: test float16
+//     URL: https://github.com/RobTillaart/float16/issues/10
+
+
 #include "float16.h"
 
 // Error -> 32760 / 32767

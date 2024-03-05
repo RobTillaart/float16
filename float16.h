@@ -34,22 +34,22 @@ public:
   uint8_t  getDecimals()          { return _decimals; };
 
   //  equalities
-  bool operator == (const float16& f);
-  bool operator != (const float16& f);
+  bool     operator == (const float16& f);
+  bool     operator != (const float16& f);
 
-  bool operator >  (const float16& f);
-  bool operator >= (const float16& f);
-  bool operator <  (const float16& f);
-  bool operator <= (const float16& f);
+  bool     operator >  (const float16& f);
+  bool     operator >= (const float16& f);
+  bool     operator <  (const float16& f);
+  bool     operator <= (const float16& f);
 
   //  negation
-  float16 operator - ();
+  float16  operator - ();
 
   //  basic math
-  float16 operator + (const float16& f);
-  float16 operator - (const float16& f);
-  float16 operator * (const float16& f);
-  float16 operator / (const float16& f);
+  float16  operator + (const float16& f);
+  float16  operator - (const float16& f);
+  float16  operator * (const float16& f);
+  float16  operator / (const float16& f);
 
   float16& operator += (const float16& f);
   float16& operator -= (const float16& f);
@@ -57,10 +57,10 @@ public:
   float16& operator /= (const float16& f);
 
   //  math helper functions
-  int   sign();       //  1 = positive   0 = zero   -1 = negative.
-  bool  isZero();
-  bool isNaN();
-  bool isInf();
+  int      sign();       //  1 = positive   0 = zero   -1 = negative.
+  bool     isZero();
+  bool     isNaN();
+  bool     isInf();
 
 
   //  CORE CONVERSION

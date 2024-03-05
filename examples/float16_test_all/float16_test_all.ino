@@ -7,6 +7,7 @@
 //  test all values except the NAN
 //  test_1 takes ~ 2 minutes on UNO @ 115200baud
 //  https://github.com/RobTillaart/float16/issues/2
+//
 //  test_3 is related to issue #10
 
 
@@ -50,7 +51,7 @@ void test_3()
 
   start = millis();
   for (int32_t x = 1; x < 65535; x++)  //  test positive integers.
-    //  for (int32_t x = -1; x > -65535; x--)   //  test negative integers.
+  //  for (int32_t x = -1; x > -65535; x--)   //  test negative integers.
   {
     last = y;
     f16 = x;
@@ -97,7 +98,7 @@ void test_2()
 void test_1()
 {
   Serial.println(__FUNCTION__);
-  // POSITIVE NUMBERS
+  //  POSITIVE NUMBERS
   prev = 0;
   errors = 0;
   start = millis();
@@ -109,7 +110,7 @@ void test_1()
     Serial.print('\t');
     float current = f16.toDouble();
     Serial.print(current, 8);
-    if (prev > current)           // numbers should be increasing.
+    if (prev > current)           //  numbers should be increasing.
     {
       Serial.print("\t\tERROR");
       errors++;
@@ -127,7 +128,7 @@ void test_1()
   Serial.println();
 
 
-  // NEGATIVE NUMBERS
+  //  NEGATIVE NUMBERS
   prev = 0;
   errors = 0;
   start = millis();
@@ -139,7 +140,7 @@ void test_1()
     Serial.print('\t');
     float current = f16.toDouble();
     Serial.print(current, 8);
-    if (prev < current)           // negative numbers should be decreasing.
+    if (prev < current)           //  negative numbers should be decreasing.
     {
       Serial.print("\t\tERROR");
       errors++;
@@ -162,4 +163,4 @@ void test_1()
 
 
 
-// -- END OF FILE --
+//  -- END OF FILE --

@@ -26,6 +26,15 @@ a floating point number. As it uses only 2 bytes where float and double have typ
 4 and 8 bytes, gains can be made at the price of range and precision.
 
 
+#### Breaking change 0.2.0
+
+Version 0.2.0 has a breaking change as a conversion bug has been found.
+For some specific values the mantissa overflowed when the float 16 was 
+assigned a value to. This overflow was not detected / corrected.
+This makes all pre-0.2.0 version obsolete. 
+See for details in issue #10.
+
+
 ## Specifications
 
 
@@ -34,9 +43,9 @@ a floating point number. As it uses only 2 bytes where float and double have typ
 | size      | 2 bytes      | layout s  eeeee  mmmmmmmmmm  (1,5,10)
 | sign      | 1 bit        |
 | exponent  | 5 bit        |
-| mantissa  | 11 bit       | ~ 3 digits
+| mantissa  | 10 bit       | ~ 3 digits
 | minimum   | 5.96046 E−8  |  smallest positive number.
-|           | 1.0009765625 |  1 + 2^−10 = smallest nr larger than 1.
+|           | 1.0009765625 |  1 + 2^−10 = smallest number larger than 1.
 | maximum   | 65504        |
 |           |              |
 

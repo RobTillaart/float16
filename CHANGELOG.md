@@ -6,11 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.1.8] - 2024-03-05
+- Fix #10, mantissa overflow
+- update GitHub/actions to version 4
+- remove DATE from examples as it has no added value.
+- minor edits
+
+----
+
 ## [0.1.8] - 2023-11-02
 - update readme.md
 - add **isNan()** (experimental).
 - minor edits.
-
 
 ## [0.1.7] - 2022-11-07
 - add changelog.md
