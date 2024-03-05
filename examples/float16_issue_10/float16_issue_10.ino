@@ -16,6 +16,7 @@ void setup()
   delay(500);
   Serial.begin(115200);
   while (!Serial) delay(1);
+
   Serial.println();
   Serial.println(__FILE__);
   Serial.print("FLOAT16_LIB_VERSION: ");
@@ -23,8 +24,68 @@ void setup()
 
   f16.setDecimals(6);
 
+  test_1();
+
+  Serial.println("\ndone");
+}
+
+void loop()
+{
+}
+
+
+void test_1()
+{
+  Serial.println(__FUNCTION__);
+
+  // test all possible positive patterns
+  for (uint32_t x = 0x0000; x < 0x7C01; x++)
+  {
+    f16.setBinary(x);
+    float16 f17 = f16.toDouble();
+
+    if (x - f17.getBinary() != 0)
+    {
+      Serial.print(f16.toDouble(), 10);
+      Serial.print("\t");
+      Serial.print(f16.getBinary(), HEX);
+      Serial.print("\t");
+      Serial.print(f17.getBinary(), HEX);
+      Serial.print("\t");
+      Serial.print(x - f17.getBinary(), HEX);
+      Serial.println();
+    }
+  }
+  Serial.println();
+
+  // test all possible negative patterns
+  for (uint32_t x = 0x8000; x < 0xFC01; x++)
+  {
+    f16.setBinary(x);
+    float16 f17 = f16.toDouble();
+
+    if (x - f17.getBinary() != 0)
+    {
+      Serial.print(f16.toDouble(), 10);
+      Serial.print("\t");
+      Serial.print(f16.getBinary(), HEX);
+      Serial.print("\t");
+      Serial.print(f17.getBinary(), HEX);
+      Serial.print("\t");
+      Serial.print(x - f17.getBinary(), HEX);
+      Serial.println();
+    }
+  }
+  Serial.println();
+
+}
+
+
+void test_0()
+{
+  Serial.println(__FUNCTION__);
   for (uint32_t x = 32750; x < 32770; x++)
-  // for (uint32_t x = 8175; x < 8205; x++)
+    // for (uint32_t x = 8175; x < 8205; x++)
   {
     f16 = x;
     Serial.print(x);
@@ -39,11 +100,8 @@ void setup()
 
   f16.setBinary(0x7800);
   Serial.print(f16.toDouble(), 2);
-  Serial.println("\ndone");
+  Serial.println();
 }
 
-void loop()
-{
-}
 
 //  -- END OF FILE --

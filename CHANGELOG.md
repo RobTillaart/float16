@@ -6,8 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [0.1.8] - 2024-03-05
+## [0.2.0] - 2024-03-05
+- **warning: breaking changes!**
 - Fix #10, mantissa overflow
+- Fix convert to subnormal numbers ( < 0.000061035...)
+- Fix printing subnormal numbers
 - update GitHub/actions to version 4
 - remove DATE from examples as it has no added value.
 - minor edits

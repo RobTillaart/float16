@@ -191,21 +191,15 @@ float float16::f16tof32(uint16_t _value) const
     else return NAN;
   }
 
-  //  SUBNORMAL/NORMAL
-  if (exp == 0)  f = 0;
-  else           f = 1;
-
-  //  PROCESS MANTISSE
-  for (int i = 9; i >= 0; i--)
+  //  NORMAL
+  if (exp > 0)
   {
-    f *= 2;
-    if (man & (1 << i)) f = f + 1;
+    f = pow(2.0, exp - 15) * (1 + man * 0.0009765625);
+    return sgn ? -f : f;
   }
-  f = f * pow(2.0, exp - 25);
-  if (exp == 0)
-  {
-    f = f * pow(2.0, -13);    // 5.96046447754e-8;
-  }
+  //  SUBNORMAL
+  //  exp == 0;
+  f = pow(2.0, -24) * man;
   return sgn ? -f : f;
 }
 
@@ -230,44 +224,46 @@ uint16_t float16::f32tof16(float f) const
   {
     return sgn ? 0x8000 : 0x0000;
   }
+
   //  denormalized float32 does not fit in float16
   if (exp == 0x00)
   {
     return sgn ? 0x8000 : 0x0000;
   }
-  //  handle infinity & NAN
+
+  //  handle INF and NAN == infinity and not a number
   if (exp == 0x00FF)
   {
     if (man) return 0xFE00;         //  NAN
     return sgn ? 0xFC00 : 0x7C00;   //  -INF : INF
   }
 
-  //  normal numbers
+  //  rescale exponent
   exp = exp - 127 + 15;
-  //  overflow does not fit => INF
+
+  //  overflow does not fit => INF (infinity)
   if (exp > 30)
   {
     return sgn ? 0xFC00 : 0x7C00;   //  -INF : INF
   }
-  //  subnormal numbers
-  if (exp < -38)
+
+  //  subnormal numbers out of range => 0.
+  if (exp < -9)
   {
     return sgn ? 0x8000 : 0x0000;   //  -0 or 0  ?   just 0 ?
   }
-  //  subnormal
+
+  //  subnormal numbers
   if (exp <= 0)
   {
-    man >>= (exp + 14);
-    //  rounding
-    man++;
-    man >>= 1;
-    //  correction mantissa overflow issue #10
-    if (man == 0x0400) man = 0x03FF;
+    exp = 0;
+    man = abs(f) * 16777216;  //  pow(2.0, 24);
     if (sgn) return 0x8000 | man;
     return man;
   }
 
-  //  normal
+
+  //  normal numbers
   //  rounding
   man++;
   man >>= 1;

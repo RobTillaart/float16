@@ -29,10 +29,16 @@ a floating point number. As it uses only 2 bytes where float and double have typ
 #### Breaking change 0.2.0
 
 Version 0.2.0 has a breaking change as a conversion bug has been found.
+See for details in issue #10.
 For some specific values the mantissa overflowed when the float 16 was 
 assigned a value to. This overflow was not detected / corrected.
-This makes all pre-0.2.0 version obsolete. 
-See for details in issue #10.
+
+During the analysis of this bug it became clear that the sub-normal numbers 
+were also implemented correctly. This is fixed too in 0.2.0.
+
+There is still an issue 0 versus -0
+
+**This makes all pre-0.2.0 version obsolete.** 
 
 
 ## Specifications
@@ -50,7 +56,9 @@ See for details in issue #10.
 |           |              |
 
 
-#### example values
+#### Example values
+
+Source: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
 
 ```cpp
 /*
@@ -160,6 +168,7 @@ negation operator.
 #### Should
 
 - unit tests of the above.
+- how to handle 0 == -0  (0x0000 == 0x8000)
 
 #### Could
 
