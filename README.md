@@ -169,6 +169,13 @@ negation operator.
 
 - unit tests of the above.
 - how to handle 0 == -0  (0x0000 == 0x8000)
+- investigate ARM alternative half-precision
+_ARM processors support (via a floating point control register bit) 
+an "alternative half-precision" format, which does away with the 
+special case for an exponent value of 31 (111112).[10] It is almost 
+identical to the IEEE format, but there is no encoding for infinity or NaNs; 
+instead, an exponent of 31 encodes normalized numbers in the range 65536 to 131008._
+
 
 #### Could
 
