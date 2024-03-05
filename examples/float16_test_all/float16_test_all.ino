@@ -2,14 +2,12 @@
 //    FILE: float16_test_all.ino
 //  AUTHOR: Rob Tillaart
 // PURPOSE: test float16
-//    DATE: 2021-11-27
 //     URL: https://github.com/RobTillaart/float16
-//
 
-// test all values except the NAN
-// test_1 takes ~ 2 minutes on UNO @ 115200baud
-
-// https://github.com/RobTillaart/float16/issues/2
+//  test all values except the NAN
+//  test_1 takes ~ 2 minutes on UNO @ 115200baud
+//  https://github.com/RobTillaart/float16/issues/2
+//  test_3 is related to issue #10
 
 
 #include "float16.h"
@@ -34,6 +32,7 @@ void setup()
 
   test_1();
   test_2();
+  test_3();
 }
 
 
@@ -42,8 +41,41 @@ void loop()
 }
 
 
+//  test for issue #10
+void test_3()
+{
+  Serial.println(__FUNCTION__);
+  uint16_t y = 0;
+  uint16_t last = 0;
+
+  start = millis();
+  for (int32_t x = 1; x < 65535; x++)  //  test positive integers.
+    //  for (int32_t x = -1; x > -65535; x--)   //  test negative integers.
+  {
+    last = y;
+    f16 = x;
+    y = f16.getBinary();
+    if (y < last)
+    {
+      Serial.print("|  ");
+      Serial.print(x);
+      Serial.print("  |  ");
+      Serial.print(y, HEX);
+      Serial.print("  |  ");
+      Serial.print(last, HEX);
+      Serial.println("  |");
+    }
+  }
+  stop = millis();
+  Serial.println();
+  Serial.print("  TIME: ");
+  Serial.println(stop - start);
+}
+
+
 void test_2()
 {
+  Serial.println(__FUNCTION__);
   start = millis();
   for (uint32_t x = 0x0001; x < 0x7C01; x++)
   {
@@ -64,6 +96,7 @@ void test_2()
 
 void test_1()
 {
+  Serial.println(__FUNCTION__);
   // POSITIVE NUMBERS
   prev = 0;
   errors = 0;

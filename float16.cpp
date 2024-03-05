@@ -1,7 +1,7 @@
 //
 //    FILE: float16.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.8
+// VERSION: 0.2.0
 // PURPOSE: library for Float16s for Arduino
 //     URL: http://en.wikipedia.org/wiki/Half-precision_floating-point_format
 
@@ -209,6 +209,7 @@ float float16::f16tof32(uint16_t _value) const
   return sgn ? -f : f;
 }
 
+
 uint16_t float16::f32tof16(float f) const
 {
   uint32_t t = *(uint32_t *) &f;
@@ -216,6 +217,13 @@ uint16_t float16::f32tof16(float f) const
   uint16_t man = (t & 0x007FFFFF) >> 12;
   int16_t  exp = (t & 0x7F800000) >> 23;
   bool     sgn = (t & 0x80000000);
+
+// Serial.print("BEFOR:\t ");
+// Serial.print(sgn, HEX);
+// Serial.print(" ");
+// Serial.print(man, HEX);
+// Serial.print(" ");
+// Serial.println(exp, HEX);
 
   //  handle 0
   if ((t & 0x7FFFFFFF) == 0)
@@ -246,21 +254,38 @@ uint16_t float16::f32tof16(float f) const
   {
     return sgn ? 0x8000 : 0x0000;   //  -0 or 0  ?   just 0 ?
   }
-  if (exp <= 0) //  subnormal
+  //  subnormal
+  if (exp <= 0)
   {
     man >>= (exp + 14);
     //  rounding
     man++;
     man >>= 1;
+    //  correction mantissa overflow issue #10
+    if (man == 0x0400) man = 0x03FF;
     if (sgn) return 0x8000 | man;
     return man;
   }
 
   //  normal
-  //  TODO rounding
-  exp <<= 10;
+  //  rounding
   man++;
   man >>= 1;
+  //  correction mantissa overflow issue #10
+  if (man == 0x0400)
+  {
+    exp++;
+    man = 0;
+  }
+  exp <<= 10;
+
+// Serial.print("AFTER:\t ");
+// Serial.print(sgn, HEX);
+// Serial.print(" ");
+// Serial.print(man, HEX);
+// Serial.print(" ");
+// Serial.println(exp, HEX);
+
   if (sgn) return 0x8000 | exp | man;
   return exp | man;
 }
