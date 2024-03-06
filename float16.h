@@ -64,7 +64,7 @@ public:
 
 
   //  CORE CONVERSION
-  //  should be private but for testing...
+  //  should be private, needed for testing.
   float    f16tof32(uint16_t) const;
   uint16_t f32tof16(float) const;
 

@@ -179,6 +179,7 @@ instead, an exponent of 31 encodes normalized numbers in the range 65536 to 1310
 
 #### Could
 
+- copy constructor?
 - update documentation.
 - error handling.
   - divide by zero errors.
