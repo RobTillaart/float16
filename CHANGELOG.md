@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Fix #10, mantissa overflow
 - Fix convert to subnormal numbers ( < 0.000061035...)
 - Fix printing subnormal numbers
+- update unit tests with **test_all**
 - update GitHub/actions to version 4
 - remove DATE from examples as it has no added value.
 - minor edits
