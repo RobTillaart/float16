@@ -32,7 +32,7 @@ float float16::toFloat() const
 
 String float16::toString(uint8_t decimals) const
 {
-  return String(f16tof32(_value), decimals);
+  return String((float)f16tof32(_value), decimals);
 }
 
 

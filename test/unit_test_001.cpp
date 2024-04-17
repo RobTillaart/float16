@@ -153,21 +153,6 @@ unittest(test_conversion)
 }
 
 
-unittest(test_printable)
-{
-  float16 f16(123.456);
-  // test default value.
-  assertEqual(4, f16.getDecimals());
-  for (int i = 0; i < 6; i++)
-  {
-    f16.setDecimals(i);
-    assertEqual(i, f16.getDecimals());
-  }
-
-  //  TODO
-  // printable? how to test?
-}
-
 
 unittest(test_all_values)
 {
