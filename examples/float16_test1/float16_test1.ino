@@ -26,7 +26,7 @@ void setup()
     f = X.f16tof32(n);
     Serial.print(n);
     Serial.print('\t');
-    Serial.println(f, 6);
+    Serial.println(f.toString(6));
   }
 
   Serial.println("\ndone");

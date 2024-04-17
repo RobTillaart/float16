@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.3.0] - 2024-04-17
+- Fix #12, breaking change. Thanks to Andyjbm for the excellent observation.
+- remove Printable interface as it makes effective footprint large!
+- remove getDecimals() and setDecimals
+- add link to float16ext class with a larger range than float16.
+
+----
+
 ## [0.2.0] - 2024-03-05
 - **warning: breaking changes!**
 - Fix #10, mantissa overflow

@@ -2,7 +2,7 @@
 //
 //    FILE: float16.h
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.0
+// VERSION: 0.3.0
 // PURPOSE: Arduino library to implement float16 data type.
 //          half-precision floating point format,
 //          used for efficient storage and transport.
@@ -11,10 +11,10 @@
 
 #include "Arduino.h"
 
-#define FLOAT16_LIB_VERSION                 (F("0.2.0"))
+#define FLOAT16_LIB_VERSION                 (F("0.3.0"))
 
 
-class float16: public Printable
+class float16 // : public Printable
 {
 public:
   //  Constructors
@@ -22,21 +22,18 @@ public:
   float16(double f);
   float16(const float16 &f)   { _value = f._value; };
 
-  //  Conversion
+  //  Conversion and printing
   double   toDouble(void) const;
+  float    toFloat() const;
+  String   toString(uint8_t decimals = 2) const;
+
   //  access the 2 byte representation.
   uint16_t getBinary()           { return _value; };
   void     setBinary(uint16_t u) { _value = u; };
 
-  //  Printable
-  size_t   printTo(Print& p) const;
-  void     setDecimals(uint8_t d) { _decimals = d; };
-  uint8_t  getDecimals()          { return _decimals; };
-
   //  equalities
   bool     operator == (const float16& f);
   bool     operator != (const float16& f);
-
   bool     operator >  (const float16& f);
   bool     operator >= (const float16& f);
   bool     operator <  (const float16& f);
@@ -62,7 +59,6 @@ public:
   bool     isNaN();
   bool     isInf();
 
-
   //  CORE CONVERSION
   //  should be private, needed for testing.
   float    f16tof32(uint16_t) const;
@@ -70,7 +66,7 @@ public:
 
 
 private:
-  uint8_t  _decimals = 4;
+  // uint8_t  _decimals = 4;
   uint16_t _value;
 
 };

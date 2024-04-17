@@ -25,6 +25,36 @@ The primary usage of the float16 data type is to efficiently store and transport
 a floating point number. As it uses only 2 bytes where float and double have typical
 4 and 8 bytes, gains can be made at the price of range and precision.
 
+#### ARM alternative half-precision
+
+_ARM processors support (via a floating point control register bit) 
+an "alternative half-precision" format, which does away with the 
+special case for an exponent value of 31 (111112).[10] It is almost 
+identical to the IEEE format, but there is no encoding for infinity or NaNs; 
+instead, an exponent of 31 encodes normalized numbers in the range 65536 to 131008._
+
+Implemented in https://github.com/RobTillaart/float16ext class.
+
+
+#### Breaking change 0.3.0
+
+Version 0.3.0 has a breaking change. The **Printable** interface is removed as 
+it causes larger than expected arrays of float 16 (See #16). On ESP8266 every
+float16 object was 8 bytes and on AVR it was 5 bytes instead of the expected 2 bytes.
+
+To support printing the class added two new conversion functions:
+```cpp
+f16.toFloat();
+f16.toString(decimals);
+
+Serial.println(f16.toFloat(), 4);
+Serial.println(f16.toString(4));
+```
+This keeps printing relative easy.
+
+The footprint of the library is now smaller and one can now create compact array's
+of float16 elements using only 2 bytes per element.
+
 
 #### Breaking change 0.2.0
 
@@ -104,15 +134,13 @@ Source: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
 
 #### Conversion
 
-- **double toDouble(void)** convert to double (or float).
+- **double toDouble(void)** convert to double (or float if that is the same).
+- **float toFloat(void)** convert to float.
+- **String toString(uint8_t decimals = 2)** convert to a String with decimals.
+
+
 - **uint16_t getBinary()** get the 2 byte binary representation.
 - **void setBinary(uint16_t u)** set the 2 bytes binary representation.
-- **size_t printTo(Print& p) const** Printable interface.
-- **void setDecimals(uint8_t d)** idem, used for printTo.
-- **uint8_t getDecimals()** idem.
-
-Note the setDecimals takes one byte per object which is not efficient for arrays of float16.
-See array example for efficient storage using set/getBinary() functions.
 
 
 #### Compare
@@ -149,14 +177,7 @@ negation operator.
 - **int sign()** returns 1 == positive, 0 == zero,  -1 == negative.
 - **bool isZero()** returns true if zero. slightly faster than **sign()**.
 - **bool isInf()** returns true if value is (-)infinite.
-
-
-#### Experimental 0.1.8
-
-- **bool isNaN()** returns true if value is not a number.
-
-
-## Notes
+- **bool isNaN()** returns true if value is not a number. 
 
 
 ## Future
@@ -169,18 +190,10 @@ negation operator.
 
 - unit tests of the above.
 - how to handle 0 == -0  (0x0000 == 0x8000)
-- investigate ARM alternative half-precision
-_ARM processors support (via a floating point control register bit) 
-an "alternative half-precision" format, which does away with the 
-special case for an exponent value of 31 (111112).[10] It is almost 
-identical to the IEEE format, but there is no encoding for infinity or NaNs; 
-instead, an exponent of 31 encodes normalized numbers in the range 65536 to 131008._
-
 
 #### Could
 
 - copy constructor?
-- update documentation.
 - error handling.
   - divide by zero errors.
 - look for optimizations.

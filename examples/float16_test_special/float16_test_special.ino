@@ -38,7 +38,7 @@ void setup()
     f16.setBinary(value[i]);
     Serial.print(value[i], HEX);
     Serial.print("\t");
-    Serial.print(f16);
+    Serial.print(f16.toString());
     Serial.print("\t");
     Serial.print(f16.toDouble(), 6);
     Serial.print("\t");
@@ -52,7 +52,7 @@ void setup()
     f16 = x;
     Serial.print(f16.getBinary(), HEX);
     Serial.print("\t");
-    Serial.print(f16);
+    Serial.print(f16.toString());
     Serial.print("\t");
     Serial.print(f16.toDouble(), 6);
     Serial.print("\t");
