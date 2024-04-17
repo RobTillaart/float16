@@ -94,7 +94,7 @@ void test_0()
     f16 = x;
     Serial.print(x);
     Serial.print("\t");
-    Serial.print(f16);
+    Serial.print(f16.toString(2));
     Serial.print("\t");
     Serial.print(f16.toDouble(), 2);
     Serial.print("\t");

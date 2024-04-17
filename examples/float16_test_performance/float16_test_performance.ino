@@ -162,7 +162,7 @@ void setup()
   delay(10);
   Serial.println();
 
-  Serial.println(f16);
+  Serial.println(f16.toString(2));
 
   Serial.println("MATH III - negation");
   start = micros();

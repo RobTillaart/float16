@@ -156,7 +156,8 @@ unittest(test_conversion)
 unittest(test_toString)
 {
   float16 f16(-123.456);
-  assertEqual("-123.456", f16.toString(3));
+  //  note the limited accuracy
+  assertEqual("-123.438", f16.toString(3));
 }
 
 
