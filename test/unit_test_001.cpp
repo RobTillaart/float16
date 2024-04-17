@@ -156,7 +156,7 @@ unittest(test_conversion)
 unittest(test_toString)
 {
   float16 f16(-123.456);
-  //  note the limited accuracy
+  fprintf(stderr, "note the limited accuracy.\n");
   assertEqual("-123.438", f16.toString(3));
 }
 

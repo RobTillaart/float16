@@ -173,7 +173,7 @@ void setup()
   delay(10);
   Serial.println();
 
-  Serial.println(f18);
+  Serial.println(f18.toString(2));
 
   Serial.println("\ndone");
 }
