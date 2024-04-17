@@ -31,8 +31,6 @@ void setup()
   Serial.print("FLOAT16_LIB_VERSION: ");
   Serial.println(FLOAT16_LIB_VERSION);
 
-  f16.setDecimals(6);
-
   for (int i = 0; i < 32; i++)
   {
     f16.setBinary(value[i]);

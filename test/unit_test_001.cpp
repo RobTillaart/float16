@@ -153,6 +153,13 @@ unittest(test_conversion)
 }
 
 
+unittest(test_toString)
+{
+  float16 f16(-123.456);
+  assertEqual("-123.456", f16.toString(3));
+}
+
+
 
 unittest(test_all_values)
 {
@@ -169,7 +176,7 @@ unittest(test_all_values)
     b = a.toDouble();
     if (x != b.getBinary())  //  assert would give 65K lines output!
     {
-      fprintf(stderr, "fail at %d\n", x);
+      fprintf(stderr, "fail at %d != %d\n", x, b.getBinary());
     }
   }
   fprintf(stderr, "test all negative patterns\n");
@@ -179,7 +186,7 @@ unittest(test_all_values)
     b = a.toDouble();
     if (x != b.getBinary())
     {
-      fprintf(stderr, "fail at %d\n", x);
+      fprintf(stderr, "fail at %d != %d\n", x, b.getBinary());
     }
   }
 }

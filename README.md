@@ -190,7 +190,8 @@ negation operator.
 
 - unit tests of the above.
   - toFloat() == same as toDouble()
-  - toString() !
+  - toString()
+  - sizeof(element) == 2
 - how to handle 0 == -0  (0x0000 == 0x8000)
 
 #### Could
