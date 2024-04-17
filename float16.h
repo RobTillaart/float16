@@ -25,7 +25,7 @@ public:
   //  Conversion and printing
   double   toDouble(void) const;
   float    toFloat() const;
-  String   toString(uint8_t decimals = 2) const;
+  String   toString(unsigned int decimals = 2) const;
 
   //  access the 2 byte representation.
   uint16_t getBinary()           { return _value; };

@@ -30,9 +30,9 @@ float float16::toFloat() const
   return f16tof32(_value);
 }
 
-String float16::toString(uint8_t decimals) const
+String float16::toString(unsigned int decimals) const
 {
-  return String((float)f16tof32(_value), decimals);
+  return String((double)f16tof32(_value), decimals);
 }
 
 

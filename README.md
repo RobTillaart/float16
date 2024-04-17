@@ -189,6 +189,8 @@ negation operator.
 #### Should
 
 - unit tests of the above.
+  - toFloat() == same as toDouble()
+  - toString() !
 - how to handle 0 == -0  (0x0000 == 0x8000)
 
 #### Could
