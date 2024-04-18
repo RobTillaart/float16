@@ -163,7 +163,7 @@ unittest(test_infinity)
   f16.setBinary(0xFC00);
   assertTrue(f16.isInf());
   assertFalse(f16.isPosInf());
-  assertTruee(f16.isNegInf());
+  assertTrue(f16.isNegInf());
 }
 
 
