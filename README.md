@@ -16,11 +16,13 @@ Arduino library to implement float16 data type.
 ## Description
 
 This **experimental** library defines the float16 (2 byte) data type, including conversion
-function to and from float32 type. It is still **work in progress**.
+function to and from float32 type.
 
 The primary usage of the float16 data type is to efficiently store and transport
 a floating point number. As it uses only 2 bytes where float and double have typical
 4 and 8 bytes, gains can be made at the price of range and precision.
+
+Note that float16 only has ~3 significant digits.
 
 To print a float16, one need to convert it with toFloat(), toDouble() or toString(decimals). 
 The latter allows concatenation and further conversion to an char array.
@@ -31,6 +33,8 @@ as it caused excessive memory usage when declaring arrays of float16.
 
 #### ARM alternative half-precision
 
+-https://en.wikipedia.org/wiki/Half-precision_floating-point_format#ARM_alternative_half-precision
+
 _ARM processors support (via a floating point control register bit) 
 an "alternative half-precision" format, which does away with the 
 special case for an exponent value of 31 (111112).[10] It is almost 
@@ -38,6 +42,21 @@ identical to the IEEE format, but there is no encoding for infinity or NaNs;
 instead, an exponent of 31 encodes normalized numbers in the range 65536 to 131008._
 
 Implemented in https://github.com/RobTillaart/float16ext class.
+
+
+#### Difference with float16 and float16ext
+
+The float16ext library has an extended range as it supports values from +- 65504 
+to +- 131008.
+
+The float16ext does not support INF, -INF and NAN. These values are mapped upon
+the largest positive, the largest negative and the largest positive number.
+
+The -0 and 0 values will both exist.
+
+
+Although they share a lot of code float16 and float16ext should not be mixed.
+In the future these libraries might merge / derive one from the other.
 
 
 #### Breaking change 0.3.0
@@ -80,7 +99,7 @@ There is still an issue with 0 versus -0 (sign gets lost in conversion).
 
 |  Attribute  |  Value          |  Notes  |
 |:------------|:----------------|:--------|
-|  size       |  2 bytes        | layout s  eeeee  mmmmmmmmmm  (1, 5, 10)
+|  size       |  2 bytes        |  layout s  eeeee  mmmmmmmmmm  (1, 5, 10)
 |  sign       |  1 bit          |
 |  exponent   |  5 bit          |
 |  mantissa   |  10 bit         |  3 - 4 digits
@@ -123,8 +142,10 @@ Source: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
 #### Related
 
 - https://wokwi.com/projects/376313228108456961  (demo of its usage)
+- https://github.com/RobTillaart/float16
 - https://github.com/RobTillaart/float16ext
 - https://github.com/RobTillaart/fraction
+- https://en.wikipedia.org/wiki/Half-precision_floating-point_format
 
 
 ## Interface
@@ -146,7 +167,7 @@ Source: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
 - **float toFloat(void)** convert value to float.
 - **String toString(unsigned int decimals = 2)** convert value to a String with decimals.
 Please note that the accuracy is only 3-4 digits for the whole number so use decimals
-with some care. 
+with care.
 
 
 #### Export and store
@@ -160,7 +181,7 @@ To serialize the internal format e.g. to disk, two helper functions are availabl
 #### Compare
 
 The library implement the standard compare functions. 
-Since 0.1.5 these are optimized, so it is fast to compare 2 float16 values.
+These are optimized, so it is fast to compare 2 float16 values.
 
 Note: comparison with a float or double always include a conversion.
 You can improve performance by converting e.g. a threshold only once before comparison.

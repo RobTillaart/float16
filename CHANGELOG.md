@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - patch examples and unit test for the above.
 - add example **float16_sizeof_array.ino**.
 - add **isPosInf()** and **isNegInf()**
-- add link to float16ext class with a larger range than float16.
+- add link to **float16ext** class with a larger range than float16.
 - update readme.md.
 - update unit-tests.
 

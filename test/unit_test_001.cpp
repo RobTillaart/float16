@@ -89,7 +89,7 @@ unittest(test_sizeof)
 {
   float16 value(1);
   float16 arr[10];
-  
+
   assertEqual(2, sizeof(value));
   assertEqual(20, sizeof(arr));
 }
