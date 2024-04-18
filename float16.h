@@ -14,7 +14,7 @@
 #define FLOAT16_LIB_VERSION                 (F("0.3.0"))
 
 
-class float16 // : public Printable
+class float16
 {
 public:
   //  Constructors
@@ -25,7 +25,7 @@ public:
   //  Conversion and printing
   double   toDouble(void) const;
   float    toFloat() const;
-  String   toString(unsigned int decimals = 2) const;
+  String   toString(unsigned int decimals = 2) const;  //  keep esp32 happy.
 
   //  access the 2 byte representation.
   uint16_t getBinary()           { return _value; };
@@ -58,6 +58,8 @@ public:
   bool     isZero();
   bool     isNaN();
   bool     isInf();
+  bool     isPosInf();
+  bool     isNegInf();
 
   //  CORE CONVERSION
   //  should be private, needed for testing.
@@ -66,7 +68,6 @@ public:
 
 
 private:
-  // uint8_t  _decimals = 4;
   uint16_t _value;
 
 };

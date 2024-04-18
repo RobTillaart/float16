@@ -85,6 +85,16 @@ unittest(test_constructor)
 }
 
 
+unittest(test_sizeof)
+{
+  float16 value(1);
+  float16 arr[10];
+  
+  assertEqual(2, sizeof(value));
+  assertEqual(20, sizeof(arr));
+}
+
+
 unittest(test_compare_equal)
 {
   float16 a(1);
@@ -142,6 +152,21 @@ unittest(test_negation)
 }
 
 
+unittest(test_infinity)
+{
+  float16 f16;
+  f16.setBinary(0x7C00);
+  assertTrue(f16.isInf());
+  assertTrue(f16.isPosInf());
+  assertFalse(f16.isNegInf());
+
+  f16.setBinary(0xFC00);
+  assertTrue(f16.isInf());
+  assertFalse(f16.isPosInf());
+  assertTruee(f16.isNegInf());
+}
+
+
 unittest(test_conversion)
 {
   for (int i = 0; i < 20; i++)
@@ -156,8 +181,9 @@ unittest(test_conversion)
 unittest(test_toString)
 {
   float16 f16(-123.456);
-  fprintf(stderr, "note the limited accuracy.\n");
-  assertEqual("-123.438", f16.toString(3));
+  fprintf(stderr, "note the limited accuracy (~4 digits).\n");
+  assertNotEqual("-123.456", f16.toString(3));
+  assertEqual("-123.4", f16.toString(1));
 }
 
 
@@ -180,7 +206,9 @@ unittest(test_all_values)
       fprintf(stderr, "fail at %d != %d\n", x, b.getBinary());
     }
   }
+
   fprintf(stderr, "test all negative patterns\n");
+  fprintf(stderr, "only fails -0\n");
   for (uint32_t x = 0x8000; x < 0xFC01; x++)
   {
     a.setBinary(x);

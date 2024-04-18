@@ -17,6 +17,8 @@ sign	KEYWORD2
 isZero	KEYWORD2
 isNan	KEYWORD2
 isInf	KEYWORD2
+isPosInf	KEYWORD2
+isNegInf	KEYWORD2
 
 
 # Constants (LITERAL1)

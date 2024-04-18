@@ -173,6 +173,18 @@ bool float16::isInf()
 }
 
 
+bool float16::isPosInf()
+{
+  return (_value == 0x7C00);
+}
+
+
+bool float16::isNegInf()
+{
+  return (_value == 0xFC00);
+}
+
+
 //////////////////////////////////////////////////////////
 //
 //  CORE CONVERSION

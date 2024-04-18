@@ -7,12 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [0.3.0] - 2024-04-17
-- Fix #12, breaking change. Thanks to Andyjbm for the excellent observation.
-- remove Printable interface as it makes effective footprint large!
-- remove getDecimals() and setDecimals
-- patch examples and unit test for the above
-- add example **float16_sizeof_array.ino**
+- Fix #12, breaking change. Thanks to Andyjbm for the measurements.
+- remove Printable interface as it makes the effective footprint larger!
+- remove getDecimals() and setDecimals().
+- patch examples and unit test for the above.
+- add example **float16_sizeof_array.ino**.
+- add **isPosInf()** and **isNegInf()**
 - add link to float16ext class with a larger range than float16.
+- update readme.md.
+- update unit-tests.
 
 ----
 
