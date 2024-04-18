@@ -172,12 +172,10 @@ bool float16::isInf()
   return ((_value == 0x7C00) || (_value == 0xFC00));
 }
 
-
 bool float16::isPosInf()
 {
   return (_value == 0x7C00);
 }
-
 
 bool float16::isNegInf()
 {

@@ -187,7 +187,6 @@ unittest(test_toString)
 }
 
 
-
 unittest(test_all_values)
 {
   float16 a;
@@ -219,6 +218,7 @@ unittest(test_all_values)
     }
   }
 }
+
 
 unittest_main()
 
