@@ -15,6 +15,7 @@ float16 f16;
 
 void setup()
 {
+  delay(500);
   while (!Serial);
   Serial.begin(115200);
   Serial.println();
