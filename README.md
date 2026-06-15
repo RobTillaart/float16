@@ -24,7 +24,7 @@ The primary usage of the float16 data type is to efficiently store and transport
 a floating point number. As it uses only 2 bytes where float and double have typical
 4 and 8 bytes, gains can be made at the price of range and precision.
 
-Note that float16 only has ~3 significant digits.
+Note that a float16 only has ~3 significant digits.
 
 To print a float16, one need to convert it with toFloat(), toDouble() or toString(decimals). 
 The latter allows concatenation and further conversion to an char array.
@@ -32,10 +32,12 @@ The latter allows concatenation and further conversion to an char array.
 In pre 0.3.0 version the Printable interface was implemented, but it has been removed
 as it caused excessive memory usage when declaring arrays of float16.
 
+Feedback as always is welcome.
+
 
 ### ARM alternative half-precision
 
--https://en.wikipedia.org/wiki/Half-precision_floating-point_format#ARM_alternative_half-precision
+- https://en.wikipedia.org/wiki/Half-precision_floating-point_format#ARM_alternative_half-precision
 
 _ARM processors support (via a floating point control register bit) 
 an "alternative half-precision" format, which does away with the 
@@ -56,7 +58,6 @@ the largest positive, the largest negative and the largest positive number.
 
 The -0 and 0 values will both exist.
 
-
 Although they share a lot of code float16 and float16ext should not be mixed.
 In the future these libraries might merge / derive one from the other.
 
@@ -68,6 +69,7 @@ it causes larger than expected arrays of float 16 (See #16). On ESP8266 every
 float16 object was 8 bytes and on AVR it was 5 bytes instead of the expected 2 bytes.
 
 To support printing the class added two new conversion functions:
+
 ```cpp
 f16.toFloat();
 f16.toString(decimals);
@@ -75,6 +77,7 @@ f16.toString(decimals);
 Serial.println(f16.toFloat(), 4);
 Serial.println(f16.toString(4));
 ```
+
 This keeps printing relative easy.
 
 The footprint of the library is now smaller and one can now create compact array's
@@ -93,7 +96,7 @@ were also not implemented correctly. This is fixed too in 0.2.0.
 
 There is still an issue with 0 versus -0 (sign gets lost in conversion).
 
-**This makes all pre-0.2.0 version obsolete.** 
+**This makes all pre-0.2.0 versions obsolete.** 
 
 
 ## Specifications
@@ -108,6 +111,7 @@ There is still an issue with 0 versus -0 (sign gets lost in conversion).
 |  minimum    |  ±5.96046 E−8   |  smallest number.
 |             |  ±1.0009765625  |  1 + 2^−10 = smallest number larger than 1.
 |  maximum    |  ±65504         |
+|  range      |                 |  12 orders of magnitude
 |             |                 |
 
 ± = ALT 0177
@@ -147,6 +151,7 @@ Source: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
 - https://github.com/RobTillaart/float16
 - https://github.com/RobTillaart/float16ext
 - https://github.com/RobTillaart/fraction
+- https://github.com/RobTillaart/printHelpers - scientific format a.o.
 - https://en.wikipedia.org/wiki/Half-precision_floating-point_format
 
 
@@ -163,7 +168,7 @@ Source: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
 - **float16(const float16 &f)** copy constructor.
 
 
-### Conversion
+### Conversion / printing
 
 - **double toDouble(void)** convert value to double or float (if the same e.g. UNO).
 - **float toFloat(void)** convert value to float.
@@ -231,7 +236,8 @@ Math helpers.
 
 #### Should
 
-- how to handle 0 == -0  (0x0000 == 0x8000)
+- how to handle 0 == -0  (0x0000 == 0x8000) or (0x8000 == 0x0000)
+  - if ((_value & 0x7FFF) == 0x0000) return (f._value & 0x7FFF) == 0x0000;
 
 #### Could
 
