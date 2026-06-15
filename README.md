@@ -62,6 +62,11 @@ Although they share a lot of code float16 and float16ext should not be mixed.
 In the future these libraries might merge / derive one from the other.
 
 
+### Breaking change 0.4.0
+
+Version 0.4.0 has fixed sign() which gave incorrect results for 0 and -0.
+
+
 ### Breaking change 0.3.0
 
 Version 0.3.0 has a breaking change. The **Printable** interface is removed as 
