@@ -152,8 +152,11 @@ float16& float16::operator /= (const float16 &f)
 //
 int float16::sign()
 {
+  //  zero test matches 0x8000 too
   if ((_value & 0x7FFF) == 0x0000) return 0;
-  if (_value < 0x7C00) return 1;
+  //  positive test including positive infinity 
+  if (_value < 0x7FFF) return 1;
+  //  remaining is negative
   return -1;
 }
 
