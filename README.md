@@ -133,7 +133,8 @@ Source: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
     0    01111        0000000001 = 1 + 2−10 = 1.0009765625 (next smallest float after 1)
     1    10000        0000000000 = −2
 
-    0    11110        1111111111 = 65504  (max half precision)
+    0    11110        1111111111 = 65504   (max float16)
+    0    11111        1111111111 = 131008  (max float16ext)
 
     0    00001        0000000000 = 2−14 ≈ 6.10352 × 10−5 (minimum positive normal)
     0    00000        1111111111 = 2−14 - 2−24 ≈ 6.09756 × 10−5 (maximum subnormal)

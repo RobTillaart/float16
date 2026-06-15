@@ -116,6 +116,7 @@ unittest(test_sign)
   assertEqual(-1, a.sign());
 }
 
+
 unittest(test_compare_equal)
 {
   float16 a(1);
