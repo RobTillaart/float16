@@ -107,7 +107,7 @@ unittest(test_sign)
   
   a.setBinary(0x0100);
   assertEqual( 1, a.sign());
-  a.setBinary(0x0100);
+  a.setBinary(0x8100);
   assertEqual(-1, a.sign());
   
   a.setBinary(0x7C00);  //  positive infinity
